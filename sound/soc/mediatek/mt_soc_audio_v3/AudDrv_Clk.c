@@ -308,11 +308,11 @@ void AudDrv_Clk_On(void)
         {
             PRINTK_AUD_CLK("%s Aud enable_clock MT_CG_AUDIO_AFE fail", __func__);
         }
-        if (enable_clock(MT_CG_AUDIO_DAC, "AUDIO"))
+//        if (enable_clock(MT_CG_AUDIO_DAC, "AUDIO"))
         {
             PRINTK_AUD_CLK("%s MT_CG_AUDIO_DAC fail", __func__);
         }
-        if (enable_clock(MT_CG_AUDIO_DAC_PREDIS, "AUDIO"))
+//        if (enable_clock(MT_CG_AUDIO_DAC_PREDIS, "AUDIO"))
         {
             PRINTK_AUD_CLK("%s MT_CG_AUDIO_DAC_PREDIS fail", __func__);
         }
@@ -416,11 +416,11 @@ void AudDrv_Clk_Off(void)
             {
                 PRINTK_AUD_CLK("%s disable_clock MT_CG_AUDIO_AFE fail", __func__);
             }
-            if (disable_clock(MT_CG_AUDIO_DAC, "AUDIO"))
+//            if (disable_clock(MT_CG_AUDIO_DAC, "AUDIO"))
             {
                 PRINTK_AUD_CLK("%s MT_CG_AUDIO_DAC fail", __func__);
             }
-            if (disable_clock(MT_CG_AUDIO_DAC_PREDIS, "AUDIO"))
+//            if (disable_clock(MT_CG_AUDIO_DAC_PREDIS, "AUDIO"))
             {
                 PRINTK_AUD_CLK("%s MT_CG_AUDIO_DAC_PREDIS fail", __func__);
             }
@@ -533,7 +533,7 @@ void AudDrv_ADC_Clk_On(void)
 //        Afe_Set_Reg(AUDIO_TOP_CON0, 0 << 24 , 1 << 24);
 #ifdef PM_MANAGER_API
 #if defined(CONFIG_MTK_LEGACY)
-        if (enable_clock(MT_CG_AUDIO_ADC, "AUDIO"))
+//        if (enable_clock(MT_CG_AUDIO_ADC, "AUDIO"))
         {
             PRINTK_AUD_CLK("%s fail", __func__);
         }
@@ -576,7 +576,7 @@ void AudDrv_ADC_Clk_Off(void)
 #ifdef PM_MANAGER_API
 #if defined(CONFIG_MTK_LEGACY)
 
-        if (disable_clock(MT_CG_AUDIO_ADC, "AUDIO"))
+//        if (disable_clock(MT_CG_AUDIO_ADC, "AUDIO"))
         {
             PRINTK_AUD_CLK("%s fail", __func__);
         }

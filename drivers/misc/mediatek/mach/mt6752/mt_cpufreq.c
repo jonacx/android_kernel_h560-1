@@ -130,18 +130,18 @@ extern unsigned int mt_get_cpu_freq(void);
 #define DEFAULT_VOLT_VLTE       (100000)
 
 /* for DVFS OPP table */
-#define CPU_DVFS_FREQ0   (1994000) /* KHz */
-#define CPU_DVFS_FREQ1   (1794000) /* KHz */
-#define CPU_DVFS_FREQ2   (1690000) /* KHz */
-#define CPU_DVFS_FREQ3   (1612000) /* KHz */
-#define CPU_DVFS_FREQ4   (1560000) /* KHz */
-#define CPU_DVFS_FREQ4_2 (1495000) /* KHz */
-#define CPU_DVFS_FREQ5   (1417000) /* KHz */
-#define CPU_DVFS_FREQ6   (1287000) /* KHz */
-#define CPU_DVFS_FREQ7   (1170000) /* KHz */
-#define CPU_DVFS_FREQ8   (936000)  /* KHz */
-#define CPU_DVFS_FREQ9   (702000)  /* KHz */
-#define CPU_DVFS_FREQ10  (468000)  /* KHz */
+#define CPU_DVFS_FREQ0   (2002000) /* KHz 154 * 13 */
+#define CPU_DVFS_FREQ1   (1794000) /* KHz 138 * 13 */
+#define CPU_DVFS_FREQ2   (1690000) /* KHz 130 * 13 */
+#define CPU_DVFS_FREQ3   (1612000) /* KHz 124 * 13 */
+#define CPU_DVFS_FREQ4   (1560000) /* KHz 120 * 13 */
+#define CPU_DVFS_FREQ4_2 (1495000) /* KHz 115 * 13 */
+#define CPU_DVFS_FREQ5   (1417000) /* KHz 109 * 13 */
+#define CPU_DVFS_FREQ6   (1287000) /* KHz 99 * 13 */
+#define CPU_DVFS_FREQ7   (1170000) /* KHz 90 * 13 */
+#define CPU_DVFS_FREQ8   (936000)  /* KHz 72 * 13 */
+#define CPU_DVFS_FREQ9   (702000)  /* KHz 54 * 13 */
+#define CPU_DVFS_FREQ10  (468000)  /* KHz 36 * 13 */
 #define CPUFREQ_LAST_FREQ_LEVEL    (CPU_DVFS_FREQ10)
 
 #ifdef CONFIG_CPU_DVFS_POWER_THROTTLING
@@ -301,20 +301,32 @@ static unsigned int _mt_cpufreq_get_cpu_level(void)
             cpu_speed = cpu_speed / 1000 / 1000;    // MHz
         else {
             cpufreq_err("@%s: missing clock-frequency property, use default CPU level\n", __func__);
+#ifdef CONFIG_CPU_OC
+            return CPU_LEVEL_0;
+#else    /* CONFIG_CPU_OC */
             return CPU_LEVEL_1;
+#endif   /* CONFIG_CPU_OC */
         }
 
         cpufreq_info("CPU clock-frequency from DT = %d MHz\n", cpu_speed);
 
         if (cpu_speed >= 1700)
+#ifdef CONFIG_CPU_OC
+            lv = CPU_LEVEL_0;   // 2.0G
+#else    /* CONFIG_CPU_OC */
             lv = CPU_LEVEL_1;   // 1.7G
+#endif   /* CONFIG_CPU_OC */
         else if (cpu_speed >= 1500)
             lv = CPU_LEVEL_2;   // 1.5G
         else if (cpu_speed >= 1300)
             lv = CPU_LEVEL_3;   // 1.3G
         else {
             cpufreq_err("No suitable DVFS table, set to default CPU level! clock-frequency=%d\n", cpu_speed);
-            lv = CPU_LEVEL_1;
+#ifdef CONFIG_CPU_OC
+            lv = CPU_LEVEL_0;   // 2.0G
+#else    /* CONFIG_CPU_OC */
+            lv = CPU_LEVEL_1;   // 1.7G
+#endif   /* CONFIG_CPU_OC */
         }
     }
 #else   /* CONFIG_OF */
@@ -331,7 +343,11 @@ static unsigned int _mt_cpufreq_get_cpu_level(void)
 				AllowTurboMode = 0; /* 1.69 * 1.1 = 1.859G */
             case 3:
             case 4:
+#ifdef CONFIG_CPU_OC
+                lv = CPU_LEVEL_0;   // 2.0G
+#else    /* CONFIG_CPU_OC */
                 lv = CPU_LEVEL_1;   // 1.7G
+#endif   /* CONFIG_CPU_OC */
                 break;
             case 5:
             case 6:
@@ -343,7 +359,11 @@ static unsigned int _mt_cpufreq_get_cpu_level(void)
                 break;
             default:
                 cpufreq_err("No suitable DVFS table, set to default CPU level! efuse=0x%x\n", cpu_speed_bounding);
-                lv = CPU_LEVEL_1;
+#ifdef CONFIG_CPU_OC
+                lv = CPU_LEVEL_0;   // 2.0G
+#else    /* CONFIG_CPU_OC */
+                lv = CPU_LEVEL_1;   // 1.7G
+#endif   /* CONFIG_CPU_OC */
                 break;
         }
 		cpufreq_info("current CPU efuse is %d, AllowTurboMode=%d\n", cpu_speed_bounding, AllowTurboMode);
@@ -355,7 +375,11 @@ static unsigned int _mt_cpufreq_get_cpu_level(void)
 #else
 static unsigned int _mt_cpufreq_get_cpu_level(void)
 {
+#ifdef CONFIG_CPU_OC
+    return CPU_LEVEL_0;
+#else    /* CONFIG_CPU_OC */
     return CPU_LEVEL_1;
+#endif   /* CONFIG_CPU_OC */
 }
 #endif
 
@@ -1081,7 +1105,7 @@ static struct opp_tbl_info opp_tbls[] = {
 /* for freq change (PLL/MUX) */
 #define PLL_FREQ_STEP		(13000)		/* KHz */
 
-// #define PLL_MAX_FREQ		(1989000)	/* KHz */ // TODO: check max freq
+#define PLL_MAX_FREQ		(2002000)	/* KHz */
 #define PLL_MIN_FREQ		(130000)	/* KHz */
 #define PLL_DIV1_FREQ		(1001000)	/* KHz */
 #define PLL_DIV2_FREQ		(520000)	/* KHz */

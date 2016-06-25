@@ -1,2 +1,3 @@
 # android_kernel_h560
-Что не работает: Звук в внешнем динамике
+
+Благодарности: vgdn1942, 15leha15, niorix, LazyC0DEr.

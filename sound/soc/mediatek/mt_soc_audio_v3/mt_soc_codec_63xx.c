@@ -100,7 +100,7 @@ static void Speaker_Amp_Change(bool enable);
 static bool TurnOnVOWADcPowerACC(int MicType, bool enable);
 
 //extern int PMIC_IMM_GetOneChannelValue(int dwChannel, int deCount, int trimd);
-extern kal_uint32 PMIC_IMM_GetOneChannelValue(mt6328_adc_ch_list_enum dwChannel, int deCount, int trimd);
+//extern kal_uint32 PMIC_IMM_GetOneChannelValue(mt6328_adc_ch_list_enum dwChannel, int deCount, int trimd);
 //extern void upmu_set_rg_vio18_cal(kal_uint32 en);  // must disable in FIB IC
 
 static mt6331_Codec_Data_Priv *mCodec_data = NULL;

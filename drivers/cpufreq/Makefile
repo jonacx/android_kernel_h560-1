@@ -1,3 +1,5 @@
+include $(srctree)/drivers/misc/mediatek/Makefile.custom
+
 # CPUfreq core
 obj-$(CONFIG_CPU_FREQ)			+= cpufreq.o
 # CPUfreq stats

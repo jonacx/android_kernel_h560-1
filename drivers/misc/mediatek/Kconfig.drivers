@@ -953,6 +953,10 @@ config MTK_TMG399X_NEW
 	bool "CM3232 for MediaTek package"
 	default n
 
+config MTK_EPL8865_NEW
+	bool "EPL8865 for MediaTek package"
+	default n
+
 # Accelerometer sensor
 config MTK_KXTJ2_1009
 	bool "KXTJ2 1009 for MediaTek package"

@@ -462,10 +462,8 @@ typedef struct
 #endif
 #define AUDIO_TOP_CON0  (AFE_BASE + 0x0000)
 
-#ifdef AUDIO_TOP_CON1
-#undef AUDIO_TOP_CON1
+
 #define AUDIO_TOP_CON1  (AFE_BASE + 0x0004)
-#endif
 #define AUDIO_TOP_CON2  (AFE_BASE + 0x0008)
 #define AUDIO_TOP_CON3  (AFE_BASE + 0x000C)
 #define AFE_DAC_CON0    (AFE_BASE + 0x0010)

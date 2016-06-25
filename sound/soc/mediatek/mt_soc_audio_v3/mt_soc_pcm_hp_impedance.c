@@ -356,7 +356,7 @@ static int Audio_HP_ImpeDance_Set(struct snd_kcontrol *kcontrol,
         setOffsetTrimBufferGain(3);
         EnableTrimbuffer(true);
         msleep(5);
-        mAuxAdc_Offset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, off_counter, 0);
+//        mAuxAdc_Offset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, off_counter, 0);
         printk("mAuxAdc_Offset= %d \n", mAuxAdc_Offset);
 
         memset((void *)Get_Afe_SramBase_Pointer(), ucontrol->value.integer.value[0], AFE_INTERNAL_SRAM_SIZE);
@@ -412,7 +412,7 @@ static int Audio_HP_ImpeDance_Set(struct snd_kcontrol *kcontrol,
             //memset((void *)Get_Afe_SramBase_Pointer(), ucontrol->value.integer.value[0], AFE_INTERNAL_SRAM_SIZE);
             msleep(20);
             dcoffset = 0;
-            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, off_counter, 0);
+//            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, off_counter, 0);
             printk("dcoffset= %d \n", dcoffset);
             msleep(3 * 1000);
         }
@@ -529,9 +529,9 @@ static void ApplyDctoDl(void)
 
             //get adc value
             msleep(1);
-            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
             average = (dcoffset + dcoffset2 + dcoffset3) / 3;
             dcinit_value = average;
             CheckDcinitValue();
@@ -560,9 +560,9 @@ static void ApplyDctoDl(void)
         {
             //get adc value
             msleep(1);
-            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+ //           dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
             average = (dcoffset + dcoffset2 + dcoffset3) / 3;
             mhp_impedance = Phase1Check(average, dcinit_value);
             printk("[phase1]value = %d average = %d dcinit_value = %d mhp_impedance = %d \n ", value, average, dcinit_value, mhp_impedance);
@@ -575,9 +575,9 @@ static void ApplyDctoDl(void)
         {
             //get adc value
             msleep(1);
-            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
-            dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset2 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
+//            dcoffset3 = PMIC_IMM_GetOneChannelValue(MT6328_AUX_CH9, 5, 0);
             average = (dcoffset + dcoffset2 + dcoffset3) / 3;
             mhp_impedance = Phase2Check(average, dcinit_value);
             printk("[phase2]value = %d average = %d dcinit_value = %d mhp_impedance=%d\n ", value, average, dcinit_value, mhp_impedance);
